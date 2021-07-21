@@ -1,0 +1,380 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Etapas" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_TransictionItem" Type="InArgument(ui:QueueItem)" />
+    <x:Property Name="in_IBGE2020" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="in_IBGE2010" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="io_Completa" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="in_CidadeCEP" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="io_IdCidade" Type="InOutArgument(x:Int32)" />
+    <x:Property Name="io_IdIBGE" Type="InOutArgument(x:Int32)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>648,701</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Etapas_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="33">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.Database</x:String>
+      <x:String>UiPath.Database.Activities</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="28">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Database</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Flowchart DisplayName="Etapas" sap:VirtualizedContainerService.HintSize="634,636" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
+        <av:Size x:Key="ShapeSize">60,75</av:Size>
+        <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,107.5 290,107.5 290,146.5</av:PointCollection>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Flowchart.StartNode>
+      <x:Reference>__ReferenceID2</x:Reference>
+    </Flowchart.StartNode>
+    <FlowStep x:Name="__ReferenceID0">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <av:Point x:Key="ShapeLocation">10,247</av:Point>
+          <av:Size x:Key="ShapeSize">200,66</av:Size>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Sequence DisplayName="Tabulação dos Dados" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_1">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="x:String" Name="aux_strCidade" />
+          <Variable x:TypeArguments="x:Double" Name="var_douCodigo" />
+          <Variable x:TypeArguments="x:String" Name="var_strGentilico" />
+          <Variable x:TypeArguments="x:String" Name="var_strPrefeito" />
+          <Variable x:TypeArguments="x:Double" Name="var_douPopulacao" />
+          <Variable x:TypeArguments="x:Double" Name="var_douDensidade" />
+          <Variable x:TypeArguments="s:DateTime" Name="var_datDataHora" />
+          <Variable x:TypeArguments="x:String" Name="var_strPopulacao2010" />
+          <Variable x:TypeArguments="x:Int32" Name="var_intClassificacao" />
+          <Variable x:TypeArguments="x:String" Name="var_strCEP" />
+        </Sequence.Variables>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <Assign DisplayName="Assign - Cidade" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_10">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[aux_strCidade]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">[in_TransictionItem.SpecificContent("Cidade").ToString]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <ui:LookupDataTable LookupColumnName="{x:Null}" LookupDataColumn="{x:Null}" RowIndex="{x:Null}" TargetColumnName="{x:Null}" TargetDataColumn="{x:Null}" DataTable="[in_IBGE2020]" DisplayName="Lookup - Codigo" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="LookupDataTable_1" LookupColumnIndex="[0]" LookupValue="[aux_strCidade]" TargetColumnIndex="[1]">
+          <ui:LookupDataTable.CellValue>
+            <OutArgument x:TypeArguments="x:Double">[var_douCodigo]</OutArgument>
+          </ui:LookupDataTable.CellValue>
+        </ui:LookupDataTable>
+        <ui:LookupDataTable LookupColumnName="{x:Null}" LookupDataColumn="{x:Null}" RowIndex="{x:Null}" TargetColumnName="{x:Null}" TargetDataColumn="{x:Null}" DataTable="[in_IBGE2020]" DisplayName="Lookup - Gentilico" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="LookupDataTable_2" LookupColumnIndex="[0]" LookupValue="[aux_strCidade]" TargetColumnIndex="[2]">
+          <ui:LookupDataTable.CellValue>
+            <OutArgument x:TypeArguments="x:String">[var_strGentilico]</OutArgument>
+          </ui:LookupDataTable.CellValue>
+        </ui:LookupDataTable>
+        <ui:LookupDataTable LookupColumnName="{x:Null}" LookupDataColumn="{x:Null}" RowIndex="{x:Null}" TargetColumnName="{x:Null}" TargetDataColumn="{x:Null}" DataTable="[in_IBGE2020]" DisplayName="Lookup - Prefeito" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="LookupDataTable_3" LookupColumnIndex="[0]" LookupValue="[aux_strCidade]" TargetColumnIndex="[3]">
+          <ui:LookupDataTable.CellValue>
+            <OutArgument x:TypeArguments="x:String">[var_strPrefeito]</OutArgument>
+          </ui:LookupDataTable.CellValue>
+        </ui:LookupDataTable>
+        <ui:LookupDataTable LookupColumnName="{x:Null}" LookupDataColumn="{x:Null}" RowIndex="{x:Null}" TargetColumnName="{x:Null}" TargetDataColumn="{x:Null}" DataTable="[in_IBGE2020]" DisplayName="Lookup - Populacao2020" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="LookupDataTable_4" LookupColumnIndex="[0]" LookupValue="[aux_strCidade]" TargetColumnIndex="[5]">
+          <ui:LookupDataTable.CellValue>
+            <OutArgument x:TypeArguments="x:Double">[var_douPopulacao]</OutArgument>
+          </ui:LookupDataTable.CellValue>
+        </ui:LookupDataTable>
+        <ui:LookupDataTable LookupColumnName="{x:Null}" LookupDataColumn="{x:Null}" RowIndex="{x:Null}" TargetColumnName="{x:Null}" TargetDataColumn="{x:Null}" DataTable="[in_IBGE2020]" DisplayName="Lookup - Densidade" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="LookupDataTable_5" LookupColumnIndex="[0]" LookupValue="[aux_strCidade]" TargetColumnIndex="[6]">
+          <ui:LookupDataTable.CellValue>
+            <OutArgument x:TypeArguments="x:Double">[var_douDensidade]</OutArgument>
+          </ui:LookupDataTable.CellValue>
+        </ui:LookupDataTable>
+        <ui:LookupDataTable LookupColumnName="{x:Null}" LookupDataColumn="{x:Null}" RowIndex="{x:Null}" TargetColumnName="{x:Null}" TargetDataColumn="{x:Null}" DataTable="[in_IBGE2010]" DisplayName="Lookup - Populacao2010" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="LookupDataTable_6" LookupColumnIndex="[0]" LookupValue="[aux_strCidade]" TargetColumnIndex="[1]">
+          <ui:LookupDataTable.CellValue>
+            <OutArgument x:TypeArguments="x:String">[var_strPopulacao2010]</OutArgument>
+          </ui:LookupDataTable.CellValue>
+        </ui:LookupDataTable>
+        <ui:LookupDataTable LookupColumnName="{x:Null}" LookupDataColumn="{x:Null}" RowIndex="{x:Null}" TargetColumnName="{x:Null}" TargetDataColumn="{x:Null}" DataTable="[in_CidadeCEP]" DisplayName="Lookup - CEP" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="LookupDataTable_7" LookupColumnIndex="[0]" LookupValue="[aux_strCidade]" TargetColumnIndex="[1]">
+          <ui:LookupDataTable.CellValue>
+            <OutArgument x:TypeArguments="x:String">[var_strCEP]</OutArgument>
+          </ui:LookupDataTable.CellValue>
+        </ui:LookupDataTable>
+        <Assign DisplayName="Assign - Contador auxiliar " sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Int32">[io_IdCIdade]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Int32">[io_IdCidade + 1]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <Assign DisplayName="Assign - DataHora" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+          <Assign.To>
+            <OutArgument x:TypeArguments="s:DateTime">[var_datDataHora]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="s:DateTime">[Now]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <If Condition="[var_douPopulacao &lt;= 15000]" DisplayName="If - Classificacao da Cidade" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="If_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If.Then>
+            <Assign DisplayName="Assign - Codigo 1" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[var_intClassificacao]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">1</InArgument>
+              </Assign.Value>
+            </Assign>
+          </If.Then>
+          <If.Else>
+            <If Condition="[var_douPopulacao &gt; 30000]" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="If_1">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <Assign DisplayName="Assign - Codigo 3" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Int32">[var_intClassificacao]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Int32">3</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </If.Then>
+              <If.Else>
+                <Assign DisplayName="Assign -Codigo 2" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_6">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Int32">[var_intClassificacao]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Int32">2</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </If.Else>
+            </If>
+          </If.Else>
+        </If>
+        <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{ io_IdCidade, io_IdCidade, aux_strCidade, &quot;MITHEL&quot;, var_strCEP,&#xD;&#xA;var_douCodigo, var_strGentilico, var_strPrefeito, var_datDataHora, var_intClassificacao,&#xD;&#xA;var_douPopulacao, var_douDensidade, var_strPopulacao2010}]" DataTable="[io_Completa]" DisplayName="Add Data Row - dtCompleta" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Formatando dados de &quot; + in_TransictionItem.SpecificContent(&quot;Cidade&quot;).ToString]" />
+      </Sequence>
+    </FlowStep>
+    <FlowSwitch x:TypeArguments="x:String" x:Name="__ReferenceID2" DisplayName="Flow Switch" sap:VirtualizedContainerService.HintSize="70,87" sap2010:WorkflowViewState.IdRef="FlowSwitch`1_6">
+      <FlowSwitch.Expression>
+        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_TransictionItem.SpecificContent(&quot;Processo&quot;).ToString" />
+      </FlowSwitch.Expression>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <av:Point x:Key="ShapeLocation">255,146.5</av:Point>
+          <av:Size x:Key="ShapeSize">70,87</av:Size>
+          <av:PointCollection x:Key="1Connector">255,190 110,190 110,247</av:PointCollection>
+          <av:PointCollection x:Key="2Connector">325,190 450,190 450,267</av:PointCollection>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <x:Reference>__ReferenceID0<x:Key>1</x:Key></x:Reference>
+      <FlowStep x:Key="2" x:Name="__ReferenceID1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">350,267</av:Point>
+            <av:Size x:Key="ShapeSize">200,66</av:Size>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <Sequence DisplayName="Insert de dados no banco" sap:VirtualizedContainerService.HintSize="376,1632" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="sd:DataTable" Name="var_dtibge" />
+            <Variable x:TypeArguments="sd:DataTable" Name="var_dtcity" />
+            <Variable x:TypeArguments="ui:DatabaseConnection" Name="var_cnxDB" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Subindo DataTables para o Banco de Dados&quot;]" />
+          <ui:FilterDataTable sap2010:Annotation.AnnotationText="Separando dados para a tabela IBGE" DataTable="[io_Completa]" DisplayName="Filter Data Table - IBGE" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="334,191" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[var_dtibge]" SelectColumnsMode="Keep">
+            <ui:FilterDataTable.Filters>
+              <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                <ui:FilterOperationArgument Column="{x:Null}" Operand="{x:Null}" BooleanOperator="And" Operator="LT" />
+              </scg:List>
+            </ui:FilterDataTable.Filters>
+            <ui:FilterDataTable.SelectColumns>
+              <scg:List x:TypeArguments="InArgument" Capacity="8">
+                <InArgument x:TypeArguments="x:String">["idCidade"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["DEV"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Estimada"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["UltimoCenso"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["DensidadeDemografica"]</InArgument>
+              </scg:List>
+            </ui:FilterDataTable.SelectColumns>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:FilterDataTable>
+          <ui:FilterDataTable sap2010:Annotation.AnnotationText="Separando dados para Tabela Cidade.&#xD;&#xA;" DataTable="[io_Completa]" DisplayName="Filter Data Table - Cidade" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="334,202" sap2010:WorkflowViewState.IdRef="FilterDataTable_2" OutputDataTable="[var_dtcity]" SelectColumnsMode="Keep">
+            <ui:FilterDataTable.Filters>
+              <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                <ui:FilterOperationArgument Column="{x:Null}" Operand="{x:Null}" BooleanOperator="And" Operator="LT" />
+              </scg:List>
+            </ui:FilterDataTable.Filters>
+            <ui:FilterDataTable.SelectColumns>
+              <scg:List x:TypeArguments="InArgument" Capacity="16">
+                <InArgument x:TypeArguments="x:String">["id"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Dev"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Cidade"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["CEP"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Datahora"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Codigo"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Gentilico"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Prefeito"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Classificacao"]</InArgument>
+              </scg:List>
+            </ui:FilterDataTable.SelectColumns>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:FilterDataTable>
+          <ui:AddDataColumn x:TypeArguments="x:Int32" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="id" DataTable="[var_dtibge]" DisplayName="Add Column - id(IBGE)" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_2" />
+          <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Inserir dados na coluna 'id' da tabela 'ibge'" DataTable="[var_dtibge]" DisplayName="For Each - Insert id" sap:VirtualizedContainerService.HintSize="334,93" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+            <ui:ForEachRow.Body>
+              <ActivityAction x:TypeArguments="sd:DataRow">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="554,713" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:Int32" Name="id" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:LookupDataTable LookupColumnName="{x:Null}" LookupDataColumn="{x:Null}" RowIndex="{x:Null}" TargetColumnName="{x:Null}" TargetDataColumn="{x:Null}" DataTable="[var_dtcity]" DisplayName="Lookup - id(Cidade)" sap:VirtualizedContainerService.HintSize="512,22" sap2010:WorkflowViewState.IdRef="LookupDataTable_8" LookupColumnIndex="[0]" LookupValue="[CurrentRow(0).ToString]" TargetColumnIndex="[0]">
+                    <ui:LookupDataTable.CellValue>
+                      <OutArgument x:TypeArguments="x:Int32">[id]</OutArgument>
+                    </ui:LookupDataTable.CellValue>
+                  </ui:LookupDataTable>
+                  <If Condition="[CurrentRow(0).Equals(id)]" sap:VirtualizedContainerService.HintSize="512,559" sap2010:WorkflowViewState.IdRef="If_3">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If.Then>
+                      <Sequence sap:VirtualizedContainerService.HintSize="476,382" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_7">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Int32">[io_IdIBGE]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Int32">[io_IdIBGE +1]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:UpdateRowItem ColumnIndex="{x:Null}" ColumnName="id" DisplayName="Update Row Item" sap:VirtualizedContainerService.HintSize="434,190" sap2010:WorkflowViewState.IdRef="UpdateRowItem_1" Row="[CurrentRow]" Value="[io_IdIBGE]" />
+                      </Sequence>
+                    </If.Then>
+                  </If>
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEachRow.Body>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:ForEachRow>
+          <ui:WriteRange StartingCell="{x:Null}" AddHeaders="False" DataTable="[var_dtcity]" DisplayName="Write Range - Tabela Cidade" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="Sheet1" WorkbookPath="Data\Output\Cidades.xlsx" />
+          <ui:WriteRange StartingCell="{x:Null}" AddHeaders="False" DataTable="[var_dtibge]" DisplayName="Write Range - Tabela IBGE" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="WriteRange_3" SheetName="Sheet1" WorkbookPath="Data\Output\IBGE.xlsx" />
+          <ui:DatabaseConnect DatabaseConnection="[var_cnxDB]" DisplayName="Connect " sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="DatabaseConnect_1" ProviderName="System.Data.SqlClient" ConnectionString="Data Source=DELLT2CN026;Initial Catalog=Teste;Integrated Security=True" />
+          <ui:InsertDataTable AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" DataTable="[var_dtcity]" DisplayName="Insert - Cidade" ExistingDbConnection="[var_cnxDB]" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="InsertDataTable_2" TableName="Cidades" />
+          <ui:InsertDataTable AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" DataTable="[var_dtibge]" DisplayName="Insert - IBGE" ExistingDbConnection="[var_cnxDB]" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="InsertDataTable_1" TableName="IBGE" />
+          <ui:DatabaseDisconnect DatabaseConnection="[var_cnxDB]" DisplayName="Disconnect" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="DatabaseDisconnect_1" />
+        </Sequence>
+      </FlowStep>
+    </FlowSwitch>
+    <x:Reference>__ReferenceID1</x:Reference>
+  </Flowchart>
+</Activity>
